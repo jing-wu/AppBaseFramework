@@ -2,6 +2,8 @@ package cn.toocrazy.app.commonlib.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
 
@@ -26,7 +28,7 @@ public abstract class BaseActivity extends Activity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setContentView(R.layout.base_activity);
+        setContentView(R.layout._base_activity);
 
         titleBar = (TitleBar) findViewById(R.id.title_bar);
         content = (RelativeLayout) findViewById(R.id.content);
@@ -36,6 +38,12 @@ public abstract class BaseActivity extends Activity {
         initViews(savedInstanceState);
 
         loadData();
+    }
+
+    protected void setContentLayout(int resId) {
+        ViewGroup.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        content.addView(View.inflate(this, resId, null), layoutParams);
     }
 
     /**

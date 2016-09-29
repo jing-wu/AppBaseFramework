@@ -4,7 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import cn.toocrazy.app.commonlib.R;
 
@@ -14,7 +16,10 @@ import cn.toocrazy.app.commonlib.R;
 
 public class TitleBar extends FrameLayout {
 
-    private LinearLayout ll_title_bar_root;
+    private RelativeLayout rl_title_bar_root;
+    private ImageButton ibtn_left;
+    private ImageButton ibtn_right;
+    private TextView tv_title;
 
     public TitleBar(Context context) {
         this(context, null);
@@ -31,14 +36,37 @@ public class TitleBar extends FrameLayout {
     }
 
     private void initView(Context context) {
-        View view = View.inflate(context, R.layout.title_bar, null);
-        ll_title_bar_root = (LinearLayout) view.findViewById(R.id.ll_title_bar_root);
+        View view = View.inflate(context, R.layout._title_bar, new FrameLayout(context));
+        rl_title_bar_root = (RelativeLayout) view.findViewById(R.id.rl_title_bar_root);
+        ibtn_left = (ImageButton) view.findViewById(R.id.ibtn_left);
+        ibtn_right = (ImageButton) view.findViewById(R.id.ibtn_right);
+        tv_title = (TextView) view.findViewById(R.id.tv_title);
 
         addView(view);
     }
 
     public void setBgColor(int color) {
-        ll_title_bar_root.setBackgroundColor(color);
+        rl_title_bar_root.setBackgroundColor(color);
+    }
+
+    public void setTitle(String title) {
+        tv_title.setText(title);
+    }
+
+    public void setTitle(int resId) {
+        tv_title.setText(resId);
+    }
+
+    public ImageButton getLeftImageButton() {
+        return ibtn_left;
+    }
+
+    public ImageButton getRightImageButton() {
+        return ibtn_right;
+    }
+
+    public TextView getTitieTextView() {
+        return tv_title;
     }
 
     @Override

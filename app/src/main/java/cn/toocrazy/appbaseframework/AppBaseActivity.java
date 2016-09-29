@@ -1,9 +1,10 @@
 package cn.toocrazy.appbaseframework;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import cn.toocrazy.app.commonlib.activity.BaseActivity;
+import cn.toocrazy.app.commonlib.utils.AppManager;
 import cn.toocrazy.app.commonlib.utils.TranslucentBarUtil;
 
 /**
@@ -12,14 +13,23 @@ import cn.toocrazy.app.commonlib.utils.TranslucentBarUtil;
 
 public abstract class AppBaseActivity extends BaseActivity {
 
-    private static final int THEME_COLOR = Color.BLUE;
+    private int THEME_COLOR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        THEME_COLOR = getResources().getColor(R.color.colorPrimary);
+
         setTranslucentBar(THEME_COLOR);
         setTitleBarColor(THEME_COLOR);
+
+        titleBar.getLeftImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppManager.getAppManager().finishActivity();
+            }
+        });
     }
 
     /**
